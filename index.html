@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sportsonline | Live Sports Streams</title>
+  <link href="./style.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="./favicon.png" />
+
+</head>
+<body>
+
+
+
+<div class="main-header">
+  <div class="logo-container">
+<a href="/" style="text-decoration: none;">
+  <h1 class="site-logo">SPORTSONLINE</h1>
+</a>
+  </div>
+  <nav class="nav-links">
+    <a href="matches/soccer-streams/all">Soccer Streams</a>
+    <a href="matches/a.m-football-streams/nfl">NFL Streams</a>
+    <a href="matches/mix-material-arts/mma">MMA Streams</a>
+    <a href="matches/basketball/nba">NBA Streams</a>
+    <a href="matches/fighting/boxing">Boxing Streams</a>
+    <a href="matches/baseball/mlb">BaseBall Streams</a>
+  </nav>
+</div>
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="content-box">
+      <section class="main-content">
+        <div class="ad-top"> <script type="text/javascript">
+          atOptions = {
+            'key': 'c20f10954c08f6a27a338dec0a893fa1',
+            'format': 'iframe',
+            'height': 90,
+            'width': 728,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript"
+          src="//www.highperformanceformat.com/c20f10954c08f6a27a338dec0a893fa1/invoke.js"></script></div>
+        <input type="text" class="search" id="searchBox" placeholder="Search team & League ..." onkeyup="filterMatches()">
+        <div id="pagination-controls"></div>
+        <div id="pagination-summary" class="pagination-info"></div>
+        <div id="matches"></div>
+      </section>
+      <aside class="sidebar">
+
+ <script type="text/javascript">
+          atOptions = {
+            'key': '6f9d413a17f9faceb3acbce2d94a743d',
+            'format': 'iframe',
+            'height': 300,
+            'width': 160,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript"
+          src="//www.highperformanceformat.com/6f9d413a17f9faceb3acbce2d94a743d/invoke.js"></script>
+
+        <script type="text/javascript">
+          atOptions = {
+            'key': '0ebcd43bfbdcba316bf97e7df886f9cb',
+            'format': 'iframe',
+            'height': 600,
+            'width': 160,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript"
+          src="//www.highperformanceformat.com/0ebcd43bfbdcba316bf97e7df886f9cb/invoke.js"></script>
+
+
+      </aside>
+    </div>
+  </div>
+
+ 
+
+
+
+
+
+<script>
+        const apiUrl = "https://opensheet.elk.sh/1rAbb9FatONKR_xwYXQ-1H2FJ90JLe_gwlmWtBYvCQgs/Sheet1";
+        const matchesContainer = document.getElementById("matches");
+        const paginationContainer = document.getElementById("pagination-controls");
+        const paginationSummary = document.getElementById("pagination-summary");
+
+        let allMatches = [];
+        let currentPage = 1;
+        let matchesPerPage = 12;
+
+        // Get current page and limit from the URL query string
+        function getCurrentPageFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = parseInt(urlParams.get('page'));
+            const limit = parseInt(urlParams.get('limit'));
+            return {
+                page: isNaN(page) ? 1 : page,  // Default to page 1 if not specified
+                limit: isNaN(limit) ? 12 : limit // Default to 12 if not specified
+            };
+        }
+
+        // Update the URL when changing the page or limit
+        function updatePageURL(page, limit) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);  // Set the page number in the URL
+            url.searchParams.set('limit', limit);  // Set the limit in the URL
+            window.history.pushState({}, '', url);  // Update the URL without reloading
+        }
+
+
+        async function loadMatches() {
+            const { page, limit } = getCurrentPageFromURL();
+            currentPage = page;
+            matchesPerPage = limit;
+
+            const res = await fetch(apiUrl);
+            const data = await res.json();
+            allMatches = data.filter(match => match["TEAM 1"] && match["TEAM 2"]);
+
+
+            renderMatches();
+            renderPagination();
+        }
+
+        function formatTime(raw) {
+            try {
+                const options = { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York', hour12: true };
+                const date = new Date(raw);
+                return new Intl.DateTimeFormat('en-US', options).format(date) + ' ET';
+            } catch (e) {
+                return raw;
+            }
+        }
+
+        function renderMatches() {
+            matchesContainer.innerHTML = "";
+            const start = (currentPage - 1) * matchesPerPage;
+            const end = start + matchesPerPage;
+            const filtered = getFilteredMatches();
+            const currentMatches = filtered.slice(start, end);
+
+            currentMatches.forEach(match => {
+                const matchDiv = document.createElement("div");
+                matchDiv.className = "match-link";
+                matchDiv.setAttribute("data-league", match.LEAGUE || "");
+                matchDiv.setAttribute("data-frame", match.IFRAME || "");
+
+               matchDiv.innerHTML = `
+      <div class="match-card">
+        <div class="match-league">${match.LEAGUE || ""}</div>
+        <div class="match-title">
+          <img src="${match['LOGO 1']}" alt="${match['TEAM 1']}" class="team-logo" />
+          ${match["TEAM 1"]} vs ${match["TEAM 2"]}
+          <img src="${match['LOGO 2']}" alt="${match['TEAM 2']}" class="team-logo" />
+        </div>
+        <div class="match-time">${formatTime(match.TIME)}</div>
+      </div>
+    `;
+
+    // ✅ Find actual match index in full list
+    const globalIndex = allMatches.indexOf(match);
+
+    // ✅ Pass both frame and match index (id)
+    matchDiv.addEventListener("click", () => {
+      const frameLink = match.IFRAME;
+      if (frameLink) {
+        window.location.href = `/player.html?frame=${encodeURIComponent(frameLink)}&id=${globalIndex}`;
+      }
+    });
+
+    matchesContainer.appendChild(matchDiv);
+  });
+
+  updatePaginationSummary(start + 1, Math.min(end, filtered.length), filtered.length);
+}
+
+        function updatePaginationSummary(start, end, total) {
+            paginationSummary.innerHTML = `Showing <strong>${start}</strong> to <strong>${end}</strong> of <strong>${total}</strong> matches`;
+        }
+
+        function renderPagination() {
+            const filtered = getFilteredMatches();
+            const totalPages = Math.ceil(filtered.length / matchesPerPage);
+            paginationContainer.innerHTML = '';
+
+            let html = `<div class="pagination-info">Page ${currentPage} of ${totalPages}</div>`;
+            html += '<div class="pagination">';
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+            }
+            html += `</div>
+        <label>Show: <select onchange="changeLimit(this.value)">
+          <option value="12" ${matchesPerPage == 12 ? 'selected' : ''}>12</option>
+          <option value="20" ${matchesPerPage == 20 ? 'selected' : ''}>20</option>
+          <option value="50" ${matchesPerPage == 50 ? 'selected' : ''}>50</option>
+          <option value="80" ${matchesPerPage == 80 ? 'selected' : ''}>80</option>
+          <option value="100" ${matchesPerPage == 100 ? 'selected' : ''}>100</option>
+        </select></label>`;
+
+            paginationContainer.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderMatches();
+            renderPagination();
+            updatePageURL(page, matchesPerPage);  // Update the URL with the new page and limit
+        }
+
+        function changeLimit(limit) {
+            matchesPerPage = parseInt(limit);
+            currentPage = 1;
+            renderMatches();
+            renderPagination();
+            updatePageURL(currentPage, limit);  // Update the URL with the new limit and page
+        }
+
+        function getFilteredMatches() {
+            const input = document.getElementById('searchBox').value.toLowerCase();
+            return allMatches.filter(match => {
+                const title = `${match["TEAM 1"]} vs ${match["TEAM 2"]}`.toLowerCase();
+                const league = (match.LEAGUE || '').toLowerCase();
+                return title.includes(input) || league.includes(input);
+            });
+        }
+
+        function filterMatches() {
+            currentPage = 1;
+            renderMatches();
+            renderPagination();
+        }
+
+        loadMatches();
+    </script>
+
+
+
+
+
+  <script type="text/javascript">
+    var _Hasync = _Hasync || [];
+    _Hasync.push(['Histats.start', '1,4915398,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function () {
+      var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+      hs.src = ('//s10.histats.com/js15_as.js');
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();
+  </script>
+  <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4915398&amp;101" alt="free stats" border="0" /></a></noscript>
