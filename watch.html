@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+    background-color: #0E1014;
+            color: #fff;
+        }
+
+        
+/* Header Styling */
+.simple-header {
+  width: 100%;
+  color: #fff;
+  padding: 25px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #2a2f3a;
+  background-color: #1a1f28;
+}
+
+/* Header Container */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.site-name {
+  font-size: 32px;
+  font-weight: bold;
+color: #22d3ee;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Hover Effect for Navigation Links */
+.nav-links a:hover {
+    background-color: #4a5862;
+  color: #fff;
+}
+
+
+        .container {
+            max-width: 1200px;
+            margin: 60px auto 20px auto;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            border: 1px solid #2a2f3a;
+  background-color: #1a1f28;-color: #fff;
+            border-radius: 12px;
+            color: #fff;
+            margin-top: 25px;
+        }
+
+
+        .main-content {
+            flex: 3;
+            min-width: 300px;
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 250px;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .match-header {
+            border: 1px solid #2e3542;
+      background-color: #232834;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .teams {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .team img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+background-color: #2c313f;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .vs {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .league {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        .iframe-wrapper {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+
+  /* Main Container */
+  .container {
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px 10px;
+  }
+
+  .main-content,
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    padding: 0;
+  }
+
+  /* Match Header */
+  .match-header {
+    padding: 15px;
+  }
+
+  .teams {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .team img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .vs {
+    font-size: 20px;
+  }
+
+  .league {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  /* Iframe */
+  .iframe-container {
+    padding-top: 60%;
+  }
+
+  /* Footer */
+  .footer {
+    font-size: 11px;
+    padding: 15px;
+    margin-top: 30px;
+  }
+}
+
+
+
+@media(max-width:768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px
+    }
+
+    .nav-links a {
+        font-size: 14px;
+        padding: 6px 10px
+        
+    }}
+    </style>
+</head>
+
+<body>
+    <header class="simple-header">
+  <div class="header-container">
+    <a href="https://v2.sportsonline.pro/" class="site-name">SportsOnline</a>
+    <nav class="nav-links">
+    <a href="matches/a.m-football-streams/nfl">NFL Streams</a>
+    <a href="matches/mix-material-arts/mma">MMA Streams</a>
+    <a href="matches/basketball/nba">NBA Streams</a>
+    <a href="matches/fighting/boxing">Boxing Streams</a>
+    <a href="matches/baseball/mlb">BaseBall Streams</a>
+    <a href="matches/soccer-streams/all">Soccer</a>
+    </nav>
+  </div>
+</header>
+
+
+<div style="display: flex; justify-content: center; margin-top: 40px;">
+  <a href="https://discord.com/invite/m773TTNr" target="_blank" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px;
+    border-radius: 999px;
+ border: 1px solid #2e3542;
+      background-color: #232834;
+          color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 19px;
+    transition: transform 0.2s ease;
+    margin-top: -20px;
+  " 
+  onmouseover="this.style.transform='scale(1.05)'" 
+  onmouseout="this.style.transform='scale(1)'">
+    <img src="https://static.vecteezy.com/system/resources/previews/023/986/880/non_2x/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.png" 
+         alt="Discord Logo" 
+         style="width: 50px; height: 48px; margin-left: -10px;">
+    Join Discord
+  </a>
+</div>
+
+    <div class="container">
+        <div class="main-content">
+
+<center>
+ <script type="text/javascript">
+	atOptions = {
+		'key' : '1affd0df5f0aa4ec9c4aac51d7b2276b',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/1affd0df5f0aa4ec9c4aac51d7b2276b/invoke.js"></script>
+</center>
+
+            <div class="match-header" id="match-info">
+                Loading Match Info...
+            </div>
+
+            <div class="iframe-wrapper">
+                <div class="iframe-container">
+                    <iframe id="playerIframe" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <center>
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '6c8b2e342bc3150b1316c166262197fd',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/6c8b2e342bc3150b1316c166262197fd/invoke.js"></script>
+</center>
+
+        </div>
+
+        <div class="sidebar">
+             <script type="text/javascript">
+	atOptions = {
+		'key' : '6367168a6dcbc9d005a65a2770432a28',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/6367168a6dcbc9d005a65a2770432a28/invoke.js"></script>
+
+
+  <script type="text/javascript">
+	atOptions = {
+		'key' : 'c056290ae6472fcc026e9aa3e4433ff2',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/c056290ae6472fcc026e9aa3e4433ff2/invoke.js"></script>
+
+        </div>
+    </div>
+
+    <script>
+        const sheetURL = "https://opensheet.elk.sh/1rAbb9FatONKR_xwYXQ-1H2FJ90JLe_gwlmWtBYvCQgs/Sheet1";
+
+        async function loadMatch() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const matchId = urlParams.get("id");
+
+            if (!matchId) {
+                document.getElementById('match-info').innerText = "Invalid match ID!";
+                return;
+            }
+
+            try {
+                const res = await fetch(sheetURL, { cache: "no-store" });
+                const data = await res.json();
+                const match = data.find(m => m["ID"] === matchId);
+
+                if (!match) {
+                    document.getElementById('match-info').innerText = "Match not found!";
+                    return;
+                }
+
+                document.title = `${match["TEAM 1"]} vs ${match["TEAM 2"]} - Live Match | BuffStreams`;
+
+                document.getElementById("playerIframe").src = match["IFRAME"];
+
+                const html = `
+          <div class="teams">
+            <div class="team">
+              <img src="${match["LOGO 1"]}" alt="Team 1">
+              <strong>${match["TEAM 1"]}</strong>
+            </div>
+            <div class="vs">VS</div>
+            <div class="team">
+              <img src="${match["LOGO 2"]}" alt="Team 2">
+              <strong>${match["TEAM 2"]}</strong>
+            </div>
+          </div>
+          <div class="league">${match["LEAGUE"] || "Unknown League"} - ${match["TIME"] || "Time Unknown"}</div>
+        `;
+
+                document.getElementById("match-info").innerHTML = html;
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('match-info').innerText = "Error loading match data!";
+            }
+        }
+
+        loadMatch();
+    </script>
+
+     <script type="text/javascript">
+    var _Hasync = _Hasync || [];
+    _Hasync.push(['Histats.start', '1,4915398,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function () {
+      var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+      hs.src = ('//s10.histats.com/js15_as.js');
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();
+  </script>
+  <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4915398&amp;101" alt="free stats" border="0" /></a></noscript>
+</body>
+</html>

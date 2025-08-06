@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SportsOnline | MLB Streams</title>
+    <link href="/style.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png" />
+    </head>
+
+    <body>
+
+    
+ <header class="simple-header">
+  <div class="header-container">
+    <a href="https://v2.sportsonline.pro/" class="site-name">SportsOnline</a>
+    <nav class="nav-links">
+    <a href="matches/a.m-football-streams/nfl">NFL Streams</a>
+    <a href="matches/mix-material-arts/mma">MMA Streams</a>
+    <a href="matches/basketball/nba">NBA Streams</a>
+    <a href="matches/fighting/boxing">Boxing Streams</a>
+    <a href="matches/baseball/mlb">BaseBall Streams</a>
+    <a href="matches/soccer-streams/all">Soccer</a>
+    </nav>
+  </div>
+</header>
+
+<div style="display: flex; justify-content: center; margin-top: 40px;">
+  <a href="https://discord.com/invite/m773TTNr" target="_blank" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px;
+    border-radius: 999px;
+ border: 1px solid #2e3542;
+      background-color: #232834;
+          color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 19px;
+    transition: transform 0.2s ease;
+    margin-top: -20px;
+  " 
+  onmouseover="this.style.transform='scale(1.05)'" 
+  onmouseout="this.style.transform='scale(1)'">
+    <img src="https://static.vecteezy.com/system/resources/previews/023/986/880/non_2x/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.png" 
+         alt="Discord Logo" 
+         style="width: 50px; height: 48px; margin-left: -10px;">
+    Join Discord
+  </a>
+</div>
+
+  <div class="main-wrapper">
+
+    <div id="matches-wrapper">
+
+
+           <script type="text/javascript">
+	atOptions = {
+		'key' : '31037bfc95eea319827433190321bc99',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/31037bfc95eea319827433190321bc99/invoke.js"></script>
+
+
+<div
+  style="
+    width: 100%;
+    max-width: 1195px;
+    margin: 20px auto;
+    padding: 0 10px;
+  "
+>
+  <div
+    style="
+      display: flex;
+      align-items: center;
+       border: 1px solid #2e3542;
+      background-color: #232834;
+      border-radius: 8px;
+      padding: 10px 14px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-left: -10px;
+     /* Mobile adjustments */
+      margin-left: 10;
+      flex-wrap: wrap;
+      gap: 10px;
+    
+    "
+  >
+    <input
+      type="text"
+      id="searchBox"
+      placeholder="Search Events..."
+      style="
+        flex: 1;
+      background-color: #232834;
+              border: none;
+        outline: none;
+        color: #ccc;
+        font-size: 16px;
+        padding: 6px 0;
+      "
+      oninput="filterMatches()"
+    />
+    <svg
+      style="width: 22px; height: 22px; color: #888; margin-left: 10px;"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      ></path>
+    </svg>
+  </div>
+</div>
+
+        </div>
+
+        <!-- Sidebar ONLY once here -->
+        <div class="sidebar-box">
+      <div style="margin-bottom: 20px;">
+      <script type="text/javascript">
+	atOptions = {
+		'key' : 'c056290ae6472fcc026e9aa3e4433ff2',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/c056290ae6472fcc026e9aa3e4433ff2/invoke.js"></script>
+
+      </div>
+
+      <div>
+       <script type="text/javascript">
+	atOptions = {
+		'key' : '4ef2fc17a7faded8a267471f28b41d6f',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/4ef2fc17a7faded8a267471f28b41d6f/invoke.js"></script>
+      </div>
+    </div>
+ <script>
+  const apiUrl = "https://opensheet.elk.sh/1rAbb9FatONKR_xwYXQ-1H2FJ90JLe_gwlmWtBYvCQgs/Sheet1";
+  const wrapper = document.getElementById("matches-wrapper");
+  const allowedLeague = "mlb";
+
+  async function fetchMatches() {
+    try {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+
+      const filteredMatches = data.filter(match =>
+        match["LEAGUE"] &&
+        match["LEAGUE"].toLowerCase().includes(allowedLeague.toLowerCase()) &&
+        match["TEAM 1"]?.trim() &&
+        match["TEAM 2"]?.trim()
+      );
+
+      for (let i = 0; i < filteredMatches.length; i += 2) {
+        const row = document.createElement("div");
+        row.className = "row";
+
+        row.appendChild(createMatchCard(filteredMatches[i]));
+        if (filteredMatches[i + 1]) {
+          row.appendChild(createMatchCard(filteredMatches[i + 1]));
+        }
+
+        wrapper.appendChild(row);
+      }
+
+    } catch (err) {
+      wrapper.innerHTML = `
+        <div style="background:#300; color:#fff; padding:20px; border-radius:10px; text-align:center;">
+          ❌ Error loading matches. Please try again later.
+        </div>`;
+      console.error(err);
+    }
+  }
+
+  function createMatchCard(match) {
+    const timeStr = (match["TIME"] || "").replace(/\u00A0/g, ' ').trim().replace("ET", "").trim();
+    const matchTime = new Date(timeStr);
+
+    const card = document.createElement("div");
+    card.className = "match-card";
+
+    card.onclick = () => {
+      const matchId = match["ID"];
+      if (matchId) {
+        window.location.href = `/watch.html?id=${matchId}`;
+      }
+    };
+
+    const countdownSpan = document.createElement("span");
+    countdownSpan.className = "countdown-timer";
+
+    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    icon.setAttribute("viewBox", "0 0 24 24");
+    icon.setAttribute("class", "clock-icon");
+    icon.setAttribute("fill", "none");
+    icon.innerHTML = `
+      <path d="M12 7V12L14.5 10.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+        stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    const timeText = document.createElement("span");
+    timeText.className = "time-text";
+
+    countdownSpan.appendChild(icon);
+    countdownSpan.appendChild(timeText);
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const diff = matchTime - now;
+
+      if (isNaN(matchTime.getTime())) {
+        timeText.textContent = "Invalid Time";
+        clearInterval(interval);
+        return;
+      }
+
+      if (diff <= 0) {
+        countdownSpan.innerHTML = `
+          <svg class="live-icon" viewBox="0 0 24 24" fill="none">
+            <g fill="#ffffff">
+              <path d="M5.99 4.93c.29.29.29.76 0 1.06-3.32 3.32-3.32 8.7 0 12.02.29.29.29.76 0 1.06a.75.75 0 0 1-1.06 0C1.02 15.17 1.02 8.83 4.93 4.93c.29-.29.77-.29 1.06 0Zm13.08 0c3.9 3.9 3.9 10.24 0 14.14a.75.75 0 0 1-1.06-1.06c3.32-3.32 3.32-8.7 0-12.02a.75.75 0 0 1 1.06-1.06ZM8.82 7.76c.29.29.29.77 0 1.06-1.76 1.76-1.76 4.62 0 6.38.29.29.29.77 0 1.06a.75.75 0 0 1-1.06 0 6.25 6.25 0 0 1 0-8.5.75.75 0 0 1 1.06 0Zm7.42 0a6.25 6.25 0 0 1 0 8.48.75.75 0 0 1-1.06-1.06c1.76-1.76 1.76-4.62 0-6.38a.75.75 0 0 1 1.06-1.06ZM12 10.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+            </g>
+          </svg>
+          <span class="live-text">Live</span>`;
+        clearInterval(interval);
+        return;
+      }
+
+      const h = Math.floor(diff / (1000 * 60 * 60));
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      timeText.textContent = `${h}h ${m}m ${s}s`;
+    };
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const timeWrapper = document.createElement("div");
+    timeWrapper.className = "match-time";
+    timeWrapper.appendChild(countdownSpan);
+
+    card.innerHTML = `
+      <div class="teams-wrapper">
+        <div class="team">
+          <img src="${match["LOGO 1"]}" alt="">
+          <strong>${match["TEAM 1"]}</strong>
+        </div>
+        <div class="vs">VS</div>
+        <div class="team">
+          <img src="${match["LOGO 2"]}" alt="">
+          <strong>${match["TEAM 2"]}</strong>
+        </div>
+      </div>
+      <div class="league-name">${match["LEAGUE"] || "Unknown League"}</div>
+    `;
+
+    card.insertBefore(timeWrapper, card.firstChild);
+    return card;
+  }
+
+  fetchMatches();
+</script>
+
+<script>
+  function filterMatches() {
+    const input = document.getElementById("searchBox").value.toLowerCase();
+    const cards = document.querySelectorAll(".match-card");
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(input) ? "block" : "none";
+    });
+
+    const rows = document.querySelectorAll(".row");
+    rows.forEach(row => {
+      const visible = [...row.children].some(child => child.style.display !== "none");
+      row.style.display = visible ? "flex" : "none";
+    });
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("a[href]").forEach(link => {
+      const href = link.getAttribute("href");
+      if (!href.startsWith("http") && !href.startsWith("/") && !href.startsWith("#")) {
+        link.setAttribute("href", "/" + href);
+      }
+    });
+  });
+</script>
+    <script type="text/javascript">
+    var _Hasync = _Hasync || [];
+    _Hasync.push(['Histats.start', '1,4915398,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function () {
+      var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+      hs.src = ('//s10.histats.com/js15_as.js');
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();
+  </script>
+  <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4915398&amp;101" alt="free stats" border="0" /></a></noscript>
+</body>
+</html>
