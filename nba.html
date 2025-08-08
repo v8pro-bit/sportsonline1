@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsOnline - Live Streams NBA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <div class="site-name">SportsOnline</div>
+            </a>
+            <nav class="nav-links">
+                <a href="nfl.html">NFL Streams</a>
+                <a href="baseball.html">BaseBall Streams</a>
+                <a href="ufc.html">UFC Streams</a>
+                <a href="nba.html">NBA Streams</a>
+                <a href="boxing.html">Boxing Streams</a>
+                <a href="soccer.html">Soccer Streams</a>
+            </nav>
+        </div>
+    </header>
+
+
+    
+     <div style="display: flex; justify-content: center; margin-top: 50px;">
+  <a href="https://discord.com/invite/m773TTNr" target="_blank" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #5865F2, #404EED);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 18px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  " onmouseover="this.style.transform='scale(1.08)'; this.style.boxShadow='0 6px 25px rgba(88, 101, 242, 0.7)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 20px rgba(88, 101, 242, 0.5)';">
+    <img src="https://static.vecteezy.com/system/resources/previews/023/986/880/non_2x/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.png"
+         alt="Discord Logo" style="width: 42px; height: 42px;">
+    <span>Join Our Discord</span>
+  </a>
+</div>
+
+
+    <div class="container">
+        <main class="main-content">
+
+
+            <div class="matches-container">
+
+
+
+                <div class="mobile-ad">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key': '3f8143f325666e9470bcb5af38573dd5',
+                            'format': 'iframe',
+                            'height': 90,
+                            'width': 728,
+                            'params': {}
+                        };
+                    </script>
+                    <script type="text/javascript"
+                        src="//www.highperformanceformat.com/3f8143f325666e9470bcb5af38573dd5/invoke.js"></script>
+                </div>
+
+
+                <div class="search-box">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search league, teams, match..." />
+                </div>
+
+
+                <!-- Matches  -->
+
+
+
+                <!-- Matches -->
+
+            </div>
+
+        </main>
+
+        <aside class="sidebar">
+             <script type="text/javascript">
+                atOptions = {
+                    'key': 'b145f0a8ad4e19e103be39d5a7fa45be',
+                    'format': 'iframe',
+                    'height': 300,
+                    'width': 160,
+                    'params': {}
+                };
+            </script>
+            <script type="text/javascript"
+                src="//www.highperformanceformat.com/b145f0a8ad4e19e103be39d5a7fa45be/invoke.js"></script>
+
+            <script type="text/javascript">
+                atOptions = {
+                    'key': '475ea948a2b7dee94beb0656c6a6066b',
+                    'format': 'iframe',
+                    'height': 600,
+                    'width': 160,
+                    'params': {}
+                };
+            </script>
+            <script type="text/javascript"
+                src="//www.highperformanceformat.com/475ea948a2b7dee94beb0656c6a6066b/invoke.js"></script>
+        </aside>
+    </div>
+
+
+    <script>
+        // Loop through all match-box elements
+        document.querySelectorAll(".match-box").forEach((box) => {
+            box.addEventListener("click", () => {
+                const iframeUrl = box.getAttribute("data-iframe");
+                if (iframeUrl) {
+                    const encodedUrl = encodeURIComponent(iframeUrl);
+                    window.open(`watch.html?url=${encodedUrl}`, "_blank");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const matchBoxes = document.querySelectorAll(".match-box");
+
+        searchInput.addEventListener("input", function () {
+            const query = this.value.toLowerCase();
+
+            matchBoxes.forEach((box) => {
+                const league = box.querySelector(".match-header")?.innerText.toLowerCase() || "";
+                const teams = box.querySelector(".teams span")?.innerText.toLowerCase() || "";
+
+                if (league.includes(query) || teams.includes(query)) {
+                    box.style.display = "block";
+                } else {
+                    box.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
