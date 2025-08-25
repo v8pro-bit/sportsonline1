@@ -8003,18 +8003,25 @@
         });
     </script>
 
-    <script>
+   <script>
     const searchInput = document.getElementById("searchInput");
     const matchBoxes = document.querySelectorAll(".match-box");
-    const dateBar = document.getElementById("dateBar");
+    const dateBars = document.querySelectorAll("#dateBar, .dateBar"); // agar multiple date headers hain
 
     searchInput.addEventListener("input", function () {
         const query = this.value.toLowerCase();
         let found = false;
 
+        // hide date bars when searching
+        if (query.length > 0) {
+            dateBars.forEach((bar) => bar.style.display = "none");
+        } else {
+            dateBars.forEach((bar) => bar.style.display = "block");
+        }
+
         matchBoxes.forEach((box) => {
             const league = box.querySelector(".match-header")?.innerText.toLowerCase() || "";
-            const teams = box.querySelector(".teams span")?.innerText.toLowerCase() || "";
+            const teams = box.querySelector(".teams")?.innerText.toLowerCase() || "";
 
             if (league.includes(query) || teams.includes(query)) {
                 box.style.display = "block";
@@ -8023,13 +8030,8 @@
                 box.style.display = "none";
             }
         });
-
-        if (!found) {
-            dateBar.style.display = "none";
-        } else {
-            dateBar.style.display = "block";
-        }
     });
 </script>
+
 </body>
 </html>
